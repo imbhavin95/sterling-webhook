@@ -28,4 +28,4 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('/');
     })->name('logout');
 });
-Route::get('webhook/{id}',[RouteController::class,'compiler'])->name('webhook');
+Route::post('webhook/{id}',[RouteController::class,'compiler'])->name('webhook');
