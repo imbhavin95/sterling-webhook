@@ -11,7 +11,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $phpCode = '<?php $connection = new mysqli("localhost", "root", "test", "webhook") or die("Connect failed: %s\n". $connection->error);';
+        $phpCode = '<?php $connection = new mysqli("localhost", "uvz9ieb28gjad", "rqgznuy2zdqn", "db1yqsjqzulcgu") or die("Connect failed: %s\n". $connection->error);';
         $data = new PrefixCode;
         $data->name = 'CONNECTION_CODE';
         $data->code = encrypt($phpCode);
