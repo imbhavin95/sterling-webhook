@@ -39,7 +39,8 @@
                         <td width="40%">
                             <div class="d-flex justify-content-between">
                                 <div href="javasscript:void(0)">{{ $data->description }}</div>
-                                <button type="button" onclick="navigator.clipboard.writeText('{{route('webhook',['id' => $data->unique_id])}}')" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="{{ route('webhook',['id' => $data->unique_id]) }}">Copy Webhook Link</button>
+                                <button type="button" onclick="copyToClipboard('{{ route('webhook', ['id' => $data->unique_id]) }}')" class="btn btn-dark copylink" data-toggle="tooltip" data-placement="top" title="{{ route('webhook', ['id' => $data->unique_id]) }}">Copy Webhook Link</button>
+
                             </div>
                         </td>
                         <td width="20%" class="text-center">
@@ -79,10 +80,16 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-    function copyLink(id) {
-        var hrefValue = $('#' + id).data("id");
-        navigator.clipboard.writeText(hrefValue);
+
+    function copyToClipboard(text) {
+        var $temp = $("<input>");
+         $("body").append($temp);
+        $temp.val(text).select();
+        document.execCommand("copy");
+        $temp.remove();
     }
+
+
 
     function deleteWebhook(id)
     {
