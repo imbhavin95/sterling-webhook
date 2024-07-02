@@ -86,6 +86,7 @@ class RouteController extends Controller
 //         $file = storage_path("app/public/compiler/".$data->unique_id .'.php');
 //        include($file);
 
+        Log::info($request->all());
         return json_encode($request->all());
     }
 
