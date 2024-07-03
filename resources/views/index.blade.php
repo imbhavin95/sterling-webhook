@@ -39,7 +39,7 @@
                         <td width="40%">
                             <div class="d-flex justify-content-between">
                                 <div href="javasscript:void(0)">{{ $data->description }}</div>
-                                <button type="button" onclick="copyToClipboard('{{ route('webhook', ['id' => $data->unique_id]) }}')" class="btn btn-dark copylink" data-toggle="tooltip" data-placement="top" title="{{ route('webhook', ['id' => $data->unique_id]) }}">Copy Webhook Link</button>
+                                <button type="button" onclick="copyToClipboard('{{ route('webhook-get', ['id' => $data->unique_id]) }}')" class="btn btn-dark copylink" data-toggle="tooltip" data-placement="top" title="{{ route('webhook-get', ['id' => $data->unique_id]) }}">Copy Webhook Link</button>
 
                             </div>
                         </td>
