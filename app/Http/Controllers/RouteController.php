@@ -68,21 +68,12 @@ class RouteController extends Controller
         $connectionCode = PrefixCode::where('name', 'CONNECTION_CODE')->first();
         $connection = decrypt($connectionCode->code);
         if ($request->editCode == 1) {
-            if(strpos($request->code, '<') === 0){
-                $editData = $connection .'?>'. $request->code;
-            }else{
-                $editData = $connection . $request->code;
-            }
+            $editData = $connection . $request->code;
             file_put_contents($filePath, $editData);
             chmod($filePath, 0777);
             $second_info = file_get_contents($filePath);
         } else {
-            if(strpos($request->code, '<') === 0){
-                $add = '?>' .$request->code;
-                file_put_contents($filePath, $add, FILE_APPEND);
-            }else{
-                file_put_contents($filePath, $request->code, FILE_APPEND);
-            }
+            file_put_contents($filePath, $request->code, FILE_APPEND);
             chmod($filePath, 0777);
             $second_info = file_get_contents($filePath);
         }
