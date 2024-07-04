@@ -82,12 +82,12 @@ class RouteController extends Controller
 
     public function compiler(Request $request, $id)
     {
-//        $data = Webhook::where('unique_id', $id)->first();
-//        $file = storage_path("app/public/compiler/".$data->unique_id .'.php');
-//        include($file);
+        $data = Webhook::where('unique_id', $id)->first();
+        $file = storage_path("app/public/compiler/".$data->unique_id .'.php');
+        include($file);
 
-        Log::info($request->all());
-        return json_encode($request->all());
+//        Log::info($request->all());
+//        return json_encode($request->all());
     }
 
     public function destroy($id)
