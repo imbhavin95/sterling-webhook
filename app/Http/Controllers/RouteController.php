@@ -68,12 +68,21 @@ class RouteController extends Controller
         $connectionCode = PrefixCode::where('name', 'CONNECTION_CODE')->first();
         $connection = decrypt($connectionCode->code);
         if ($request->editCode == 1) {
-            $editData = $connection . $request->code;
+            if(strpos($request->code, '<') === 0){
+                $editData = $connection .'?>'. $request->code;
+            }else{
+                $editData = $connection . $request->code;
+            }
             file_put_contents($filePath, $editData);
             chmod($filePath, 0777);
             $second_info = file_get_contents($filePath);
         } else {
-            file_put_contents($filePath, $request->code, FILE_APPEND);
+            if(strpos($request->code, '<') === 0){
+                $add = '?>' .$request->code;
+                file_put_contents($filePath, $add, FILE_APPEND);
+            }else{
+                file_put_contents($filePath, $request->code, FILE_APPEND);
+            }
             chmod($filePath, 0777);
             $second_info = file_get_contents($filePath);
         }
@@ -83,7 +92,7 @@ class RouteController extends Controller
     public function compiler(Request $request, $id)
     {
 //        $data = Webhook::where('unique_id', $id)->first();
-//         $file = storage_path("app/public/compiler/".$data->unique_id .'.php');
+//        $file = storage_path("app/public/compiler/".$data->unique_id .'.php');
 //        include($file);
 
         Log::info($request->all());
